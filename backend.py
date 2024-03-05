@@ -202,7 +202,7 @@ def generate_code(token, link, output_path):
 
             text = text.replace("\n", "\\n")
 
-            lines.extend([f'canvas.create_text(',
+            lines.extend(['canvas.create_text(',
                           f'    {x}, {y},',
                           f'    text = "{text}",',
                           f'    fill = "{color}",',

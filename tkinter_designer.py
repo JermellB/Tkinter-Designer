@@ -64,7 +64,7 @@ canvas.place(x=0,y=0)
 canvas.create_rectangle(431, 0, 431 + 431, 0 + 519, fill="#FCFCFC",outline="")
 canvas.create_rectangle(40, 160, 40 + 60, 160 + 5, fill="#FCFCFC",outline="")
 
-text_box_bg = PhotoImage(file=f"images/TextBox_Bg.png")
+text_box_bg = PhotoImage(file="images/TextBox_Bg.png")
 token_entry_img = canvas.create_image(650.5,167.5,image=text_box_bg)
 URL_entry_img = canvas.create_image(650.5,248.5,image=text_box_bg)
 filePath_entry_img = canvas.create_image(650.5,329.5,image=text_box_bg)
