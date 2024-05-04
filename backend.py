@@ -51,7 +51,7 @@ def generate_code(token, link, output_path):
     lines = []
     lines.extend(['from tkinter import *\n\n',
                   'def btn_clicked():',
-                  '    print("Button Clicked")\n\n\n'
+                  '    print("Button Clicked")\n\n\n',
                   'window = Tk()'])
 
 
@@ -233,9 +233,9 @@ def generate_code(token, link, output_path):
                     ) as file:
                 file.write(image_link.content)
 
-            lines.extend([f'entry{text_entry_count}_img = PhotoImage('
+            lines.extend([f'entry{text_entry_count}_img = PhotoImage(',
                           f'file = f"img_textBox{text_entry_count}.png")',
-                          f'entry{text_entry_count}_bg = '
+                          f'entry{text_entry_count}_bg = ',
                           'canvas.create_image(',
                           f'    {x}, {y},',
                           f'    image = entry{text_entry_count}_img)\n'])
@@ -255,7 +255,7 @@ def generate_code(token, link, output_path):
             x, y = get_coordinates(element)
             x = x + corner_radius
 
-            lines.extend([f'entry{text_entry_count} = '
+            lines.extend([f'entry{text_entry_count} = ',
                           f'{element_types[element["name"]]}(',
                           '    bd = 0,',
                           f'    bg = "{bg}",',
@@ -286,7 +286,8 @@ def generate_code(token, link, output_path):
 
                 lines.extend(
                     [
-                        f"image_{image_count} = PhotoImage(" f'file = "image_{image_count}.png")',
+                        f"image_{image_count} = PhotoImage(",
+                        f'file = "image_{image_count}.png")',
                         f"canvas_image_{image_count} = canvas.create_image(",
                         f"    {x}, {y},",
                         f"    image=image_{image_count})\n",
