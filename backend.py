@@ -1,6 +1,7 @@
 import requests
 import os
 from tkinter import messagebox
+from security import safe_requests
 
 def generate_code(token, link, output_path):
 
@@ -74,8 +75,7 @@ def generate_code(token, link, output_path):
     file_id = find_between(file_url, "file/", "/")
 
     try:
-        response = requests.get(
-            f"https://api.figma.com/v1/files/{file_id}",
+        response = safe_requests.get(f"https://api.figma.com/v1/files/{file_id}",
             headers={"X-FIGMA-TOKEN": token})
 
     except ValueError:
@@ -167,11 +167,10 @@ def generate_code(token, link, output_path):
             x, y = get_coordinates(element)
             item_id = element["id"]
 
-            response = requests.get(
-                f"https://api.figma.com/v1/images/{file_id}?ids={item_id}",
+            response = safe_requests.get(f"https://api.figma.com/v1/images/{file_id}?ids={item_id}",
                 headers={"X-FIGMA-TOKEN": f"{token}"})
 
-            image_link = requests.get(response.json()["images"][item_id])
+            image_link = safe_requests.get(response.json()["images"][item_id])
 
             with open(f"{generated_dir}img{btn_count}.png", "wb") as file:
                 file.write(image_link.content)
@@ -221,11 +220,10 @@ def generate_code(token, link, output_path):
 
             item_id = element["id"]
 
-            response = requests.get(
-                f"https://api.figma.com/v1/images/{file_id}?ids={item_id}",
+            response = safe_requests.get(f"https://api.figma.com/v1/images/{file_id}?ids={item_id}",
                 headers={"X-FIGMA-TOKEN": f"{token}"})
 
-            image_link = requests.get(response.json()["images"][item_id])
+            image_link = safe_requests.get(response.json()["images"][item_id])
 
             with open(
                     f"{generated_dir}img_textBox{text_entry_count}.png",
@@ -273,13 +271,12 @@ def generate_code(token, link, output_path):
                 x, y = x + (width / 2), y + (height / 2)
                 item_id = element["id"]
 
-                response = requests.get(
-                    f"https://api.figma.com/v1/images/{file_id}"
+                response = safe_requests.get(f"https://api.figma.com/v1/images/{file_id}"
                     f"?ids={item_id}&use_absolute_bounds=true",
                     headers={"X-FIGMA-TOKEN": f"{token}"},
                 )
 
-                image_link = requests.get(response.json()["images"][item_id])
+                image_link = safe_requests.get(response.json()["images"][item_id])
 
                 with open(f"{generated_dir}image_{image_count}.png", "wb") as file:
                     file.write(image_link.content)
