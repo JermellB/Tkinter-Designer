@@ -76,7 +76,7 @@ def generate_code(token, link, output_path):
     try:
         response = requests.get(
             f"https://api.figma.com/v1/files/{file_id}",
-            headers={"X-FIGMA-TOKEN": token})
+            headers={"X-FIGMA-TOKEN": token}, timeout=60)
 
     except ValueError:
         messagebox.showerror(
@@ -169,9 +169,9 @@ def generate_code(token, link, output_path):
 
             response = requests.get(
                 f"https://api.figma.com/v1/images/{file_id}?ids={item_id}",
-                headers={"X-FIGMA-TOKEN": f"{token}"})
+                headers={"X-FIGMA-TOKEN": f"{token}"}, timeout=60)
 
-            image_link = requests.get(response.json()["images"][item_id])
+            image_link = requests.get(response.json()["images"][item_id], timeout=60)
 
             with open(f"{generated_dir}img{btn_count}.png", "wb") as file:
                 file.write(image_link.content)
@@ -223,9 +223,9 @@ def generate_code(token, link, output_path):
 
             response = requests.get(
                 f"https://api.figma.com/v1/images/{file_id}?ids={item_id}",
-                headers={"X-FIGMA-TOKEN": f"{token}"})
+                headers={"X-FIGMA-TOKEN": f"{token}"}, timeout=60)
 
-            image_link = requests.get(response.json()["images"][item_id])
+            image_link = requests.get(response.json()["images"][item_id], timeout=60)
 
             with open(
                     f"{generated_dir}img_textBox{text_entry_count}.png",
@@ -277,9 +277,9 @@ def generate_code(token, link, output_path):
                     f"https://api.figma.com/v1/images/{file_id}"
                     f"?ids={item_id}&use_absolute_bounds=true",
                     headers={"X-FIGMA-TOKEN": f"{token}"},
-                )
+                timeout=60)
 
-                image_link = requests.get(response.json()["images"][item_id])
+                image_link = requests.get(response.json()["images"][item_id], timeout=60)
 
                 with open(f"{generated_dir}image_{image_count}.png", "wb") as file:
                     file.write(image_link.content)
